@@ -446,7 +446,7 @@ class Qwen2VLGRPOTrainer(Trainer):
             completions = [[{"role": "assistant", "content": completion}] for completion in completions]
 
         # markpeng: for debugging
-        response = completions[0]
+        response = completions[0][0]["content"]
         print("\033[92m" + response + "\033[0m")
 
         # Compute the rewards
