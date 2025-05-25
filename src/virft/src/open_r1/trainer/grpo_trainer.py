@@ -443,6 +443,10 @@ class Qwen2VLGRPOTrainer(Trainer):
         if is_conversational(inputs[0]):
             completions = [[{"role": "assistant", "content": completion}] for completion in completions]
 
+        # markpeng: for debugging
+        response = completions[0]
+        print("\033[92m" + response + "\033[0m")
+
         # Compute the rewards
         prompts = [prompt for prompt in prompts for _ in range(self.num_generations)]
 
