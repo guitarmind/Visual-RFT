@@ -403,6 +403,8 @@ class Qwen2VLGRPOTrainer(Trainer):
         with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
             # prompt_inputs['pixel_values'] = prompt_inputs['pixel_values'][None]
             pixel_values = prompt_inputs["pixel_values"].repeat(self.num_generations, 1)
+            # TODO: shoud use use_cache=True here?
+            # markpeng: refer to https://github.com/Liuziyu77/Visual-RFT/issues/52
             prompt_completion_ids = unwrapped_model.generate(**prompt_inputs, generation_config=self.generation_config)
 
             prompt_length = prompt_ids.size(1)
